@@ -17,7 +17,7 @@ def resource_path(relative_path: Union[str, Path]) -> Path:   #so when turning s
     return base_dir / relative_path
 
 
-def intro_text():
+def intro_text() -> None:
     intro = tk.Label(
         text="H-hi there...\nDo you th-think I could have your\ncredit card information, p-please?",
         bg="#FFFFFF",
@@ -29,7 +29,7 @@ def intro_text():
     intro.grid(row=0, rowspan=1, column=1, columnspan=3)
 
 
-def text_w_entrybox(root, text_label_sentence, text_row, text_rowspan, text_column, text_columnspan, entry_row, entry_rowspan, entry_column, entry_columnspan):
+def text_w_entrybox(root, text_label_sentence, text_row, text_rowspan, text_column, text_columnspan, entry_row, entry_rowspan, entry_column, entry_columnspan) -> None:
     text_label = tk.Label(
         root,
         text = text_label_sentence,
@@ -65,16 +65,16 @@ class AnimatedGIF:
 
         # self.animate()
 
-    def increment_frame(self):
+    def increment_frame(self) -> None:
         self.frame = (self.frame + 1) % len(self.sequence)
 
-    def animate(self):
+    def animate(self) -> None:
         self.increment_frame()
         self.parent.after(140, self.animate) # The number represents frame delay, in this case 140 ms, or ~7 FPS
         self.canvas.itemconfig(self.image, image=self.sequence[self.frame])
 
 
-def main():
+def main() -> None:
     ### Resources
     root = tk.Tk()
     window_icon = resource_path('icon_ico.ico')
