@@ -3,16 +3,17 @@ import tkinter as tk
 from pathlib import Path
 from typing import Union
 
-from PIL import Image, ImageSequence, ImageTk
+from PIL import Image, ImageSequence, ImageTk  # type: ignore
 
-def resource_path(relative_path: Union[str, Path]) -> Path:   #so when turning script into a exe, allows us to use other files, such as images
+
+def resource_path(relative_path: Union[str, Path]) -> Path:  #so when turning script into a exe, allows us to use other files, such as images
     """ Get absolute path to resource, works for dev and for PyInstaller """
     
     base_dir = Path(__file__).parent
     
     if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
         # PyInstaller creates a temp folder and stores path in _MEIPASS
-        base_dir = Path(sys._MEIPASS) # pylint: disable=no-member
+        base_dir = Path(sys._MEIPASS)  # pylint: disable=no-member
 
     return base_dir / relative_path
 
@@ -48,6 +49,7 @@ def text_w_entrybox(root, text_label_sentence, text_row, text_rowspan, text_colu
         sticky=tk.W
     )
 
+
 class AnimatedGIF:
     def __init__(self, parent, file_path):
         self.parent = parent
@@ -77,9 +79,9 @@ class AnimatedGIF:
 def main() -> None:
     ### Resources
     root = tk.Tk()
-    window_icon = resource_path('icon_ico.ico')
-    tsukasa_gif_file = resource_path('tsukasa.gif')
-    thx_button = resource_path('thanks_button.png')
+    window_icon = resource_path(Path('data') / 'icon_ico.ico')
+    tsukasa_gif_file = resource_path(Path('data') / 'tsukasa.gif')
+    thx_button = resource_path(Path('data') / 'thanks_button.png')
 
     thanksbutton_image = tk.PhotoImage(file=thx_button)
     button_quit = tk.Button(
