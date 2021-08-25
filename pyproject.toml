@@ -1,0 +1,77 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.coverage.run]
+branch = true
+relative_files = true
+omit = [
+    # 'tests/*',
+]
+
+
+[tool.flake8]
+max-line-length = 120
+extend-ignore = 'E203,'
+max-complexity = 15 # Info: https://en.wikipedia.org/wiki/Cyclomatic_complexity
+per-file-ignores = """\
+# F401: Ignore "unused" imports
+# F403: Ignore star imports
+# F405: Ignore names from star imports
+__init__.py:F401,F403,F405\
+"""
+
+
+[tool.poetry]
+name = "tsukasa-credit-card-gag-scam"
+version = "1.0.0"
+description = "A joke program based on a popular credit card scam meme"
+
+authors = ["Bleeplo <bleeplo@users.noreply.github.com>",]
+maintainers = ["Lari Liuhamo <lari.liuhamo+github@gmail.com>",]
+
+include = ['CHANGELOG.md', 'LICENSE',]
+license = 'MIT'
+readme = 'README.md'
+
+homepage = 'https://github.com/Bleeplo/Tsukasa-credit-card-gag-scam'
+repository = 'https://github.com/Diapolo10/iplib3'
+documentation = 'https://github.com/Diapolo10/iplib3/tree/main/docs'
+
+
+[tool.poetry.urls]
+"Windows executable" = 'https://drive.google.com/file/d/1gVKI089Y7Ub7MrqNmRwsvOGZYS3msnIu/view?usp=sharing'
+
+
+[tool.poetry.dependencies]
+python = "^3.6"
+Pillow = "^8.3.1"
+
+
+[tool.poetry.dev-dependencies]
+
+
+[tool.pylint.'MESSAGES CONTROL']
+max-line-length = 120
+disable = [  # TODO: Improve code so that these can be dropped
+    'R0911', # Too many return statements
+    'R0912', # Too many branches
+    'W0642', # Invalid assignment to self or cls in instance or class method, respectively.
+    'R0801', # Similar lines in 2 files
+]
+
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = """
+--doctest-modules \
+--cov=./ \
+--cov-append \
+--cov-report html:tests/reports/coverage-html \
+--cov-report xml:tests/reports/coverage.xml \
+--ignore=docs/
+"""
+testpaths = [
+    'tests',
+]
